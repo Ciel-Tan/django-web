@@ -4,7 +4,7 @@ from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 # from django.contrib.auth import views
-
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path("", views.main, name="index"),
     path("shop_details/", views.shop_details, name="shop_details"),
@@ -12,9 +12,12 @@ urlpatterns = [
     path("shopping_cart/", views.shopping_cart, name="shopping_cart"),
     path("genre_list/", views.genre_list, name="genre_list"),
     path("search/", views.name_key, name="name_key"),
+    path("reset_cart/", views.reset_cart, name="reset_cart"),
 
-    path("login/", views.login, name="login"),
+    path('login/', views.login, name='login'),
+    path('login_handler/', views.login_handler, name='login_handler'),
     path("signup/", views.signup, name="signup"),
+    path('logout/', views.logout, name='logout'),
 
     path("admin_list/", views.admin_list, name="admin_list"),
     path("form_add/", views.form_add, name="form_add"),

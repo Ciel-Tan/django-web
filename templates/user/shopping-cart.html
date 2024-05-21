@@ -1,3 +1,5 @@
+{% load static %}
+{% static "images" as baseUrl %}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -21,6 +23,72 @@
     <link rel="stylesheet" href="../static/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../static/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../static/css/style.css" type="text/css">
+    <style>
+        .product-image {
+            width: 100px; /* Đặt kích thước ảnh */
+            height: auto; /* Để chiều cao tự động điều chỉnh dựa trên chiều rộng */
+            vertical-align: middle; /* Căn chỉnh ảnh theo chiều dọc để chúng ở cùng một vị trí */
+        }
+        /* Google Fonts - Poppins */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+        
+        .overlay {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        pointer-events: none;
+        }
+        section.active .overlay {
+        opacity: 1;
+        pointer-events: auto;
+        }
+        .modal-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 380px;
+        width: 100%;
+        padding: 30px 20px;
+        border-radius: 24px;
+        background-color: #fff;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        transform: translate(-50%, -50%) scale(1.2);
+        }
+        section.active .modal-box {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+        }
+        .modal-box i {
+        font-size: 70px;
+        color: #4070f4;
+        }
+        .modal-box h2 {
+        margin-top: 20px;
+        font-size: 25px;
+        font-weight: 500;
+        color: #333;
+        }
+        .modal-box h3 {
+        font-size: 16px;
+        font-weight: 400;
+        color: #333;
+        text-align: center;
+        }
+        .modal-box .buttons {
+        margin-top: 25px;
+        }
+        .modal-box button {
+        font-size: 14px;
+        padding: 6px 12px;
+        margin: 0 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,14 +101,14 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="../static/img/logo.png" alt=""></a>
+            <a href="../../"><img src="../static/img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">item: <span>{{full_pr}}đ</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -54,6 +122,7 @@
             </div>
             <div class="header__top__right__auth">
                 <a href="{% url "admin:index" %}"><i class="fa fa-user"></i> Login</a>
+                <span>Hello, {{username}}</span>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -95,7 +164,13 @@
                     <div class="col-lg-6">
                         <div class="header__top__right">
                             <div class="header__top__right__auth">
+                                
+                                {% if user.is_authenticated %}
+                                <span>Hello, {{username}}</span>
+                                <a href="../logout" >Log out</a>
+                                {% else %}
                                 <a href="{% url "admin:index" %}"><i class="fa fa-user"></i> Login</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -106,7 +181,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./"><img src="../static/img/logo.png" alt=""></a>
+                        <a href="../../"><img src="../static/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -130,7 +205,7 @@
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>{{full_pr}}đ</span></div>
                     </div>
                 </div>
             </div>
@@ -152,25 +227,17 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            {% for cait in categories %}
+                                <li><a href="../genre_list?category={{ cait.name }}">{{ cait.name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="What do yo u need?">
+                            <form action="../search" method="GET">
+                                <input type="text" placeholder="What do yo u need?" name="keyy">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
@@ -225,72 +292,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for carting, price in order_details %}
                                 <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/img/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $55.00
-                                    </td>
+                                    <td><img class="product-image" src="{{carting.product.img.url}}" alt="{{ carting.product.name }}" width="100" height="100">{{carting.product.name}}</td>
+                                    <td>{{carting.product.price}}đ</td>
+                                    <!-- <td>{{carting.quantity}}</td> -->
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="1">
+                                                <input type="text" value="{{carting.quantity}}">
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total">
-                                        $110.00
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
+                                    <td>{{price}}đ</td>
                                 </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/img/cart/cart-2.jpg" alt="">
-                                        <h5>Fresh Garden Vegetable</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $39.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $39.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/img/cart/cart-3.jpg" alt="">
-                                        <h5>Organic Bananas</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $69.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $69.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -319,10 +335,23 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Subtotal <span>{{full_pr}}đ</span></li>
+                            <li>Total <span>{{full_pr}}đ</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <section>
+                            <button class="show-modal primary-btn">Proceed Checkout!</button>
+                            <span class="overlay"></span>
+                            <div class="modal-box">
+                              <i class="fa-regular fa-circle-check"></i>
+                              <h2>Completed</h2>
+                              <h3>You have sucessfully downloaded all the source code files.</h3>
+                              <div class="buttons">
+                                <button class="close-btn">Ok, Close</button>
+                                <button>Open File</button>
+                              </div>
+                            </div>
+                          </section>
+                          <a href="../reset_cart" class="show-modal primary-btn">Shopping again</a >
                     </div>
                 </div>
             </div>
@@ -397,6 +426,19 @@
     <script src="../static/js/mixitup.min.js"></script>
     <script src="../static/js/owl.carousel.min.js"></script>
     <script src="../static/js/main.js"></script>
+    <script>
+        const section = document.querySelector("section"),
+          overlay = document.querySelector(".overlay"),
+          showBtn = document.querySelector(".show-modal"),
+          closeBtn = document.querySelector(".close-btn");
+        showBtn.addEventListener("click", () => section.classList.add("active"));
+        overlay.addEventListener("click", () =>
+          section.classList.remove("active")
+        );
+        closeBtn.addEventListener("click", () =>
+          section.classList.remove("active")
+        );
+    </script>
 
 
 </body>

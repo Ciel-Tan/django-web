@@ -75,8 +75,13 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="{% url "admin:index" %}"><i class="fa fa-user"></i> Login</a>
-            </div>
+                {% if user.is_authenticated %}
+                    <span>Hello, {{username}}</span>
+                    <a href="../logout" >Log out</a>
+                    {% else %}
+                    <a href="{% url "login" %}"><i class="fa fa-user"></i> Login</a>
+                    {% endif %}
+                    </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -117,7 +122,12 @@
                     <div class="col-lg-6">
                         <div class="header__top__right">
                             <div class="header__top__right__auth">
-                                <a href="{% url "admin:index" %}"><i class="fa fa-user"></i> Login</a>
+                                {% if user.is_authenticated %}
+                                <span>Hello, {{username}}</span>
+                                <a href="../logout" >Log out</a>
+                                {% else %}
+                                <a href="{% url "login" %}"><i class="fa fa-user"></i> Login</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

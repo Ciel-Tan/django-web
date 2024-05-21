@@ -49,6 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+  #  'app.middleware.AdminCheckMiddleware',
 ]
 
 ROOT_URLCONF = "djangoWeb.urls"
@@ -140,3 +141,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 AUTH_USER_MODEL = "app.user" 
+
+LOGIN_REDIRECT_URL = 'shopping_cart'  # Chuyển hướng người dùng sau khi đăng nhập
+LOGIN_URL = 'admin'
