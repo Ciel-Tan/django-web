@@ -13,6 +13,11 @@ urlpatterns = [
     path("genre_list/", views.genre_list, name="genre_list"),
     path("search/", views.name_key, name="name_key"),
     path("reset_cart/", views.reset_cart, name="reset_cart"),
+    path("update_cart/", views.updateQTY_cart, name="update_cart"),
+    path("proceed_cart/", views.proceed_cart, name="proceed_cart"),
+    path("add_to_cart/", views.add_to_cart, name="add_to_cart"),
+    path("del_cart/", views.delete_cart, name="delete_cart"),
+
 
     path('login/', views.login, name='login'),
     path('login_handler/', views.login_handler, name='login_handler'),

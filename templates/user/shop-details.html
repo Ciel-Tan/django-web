@@ -74,7 +74,7 @@
             <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
           </li>
           <li>
-            <a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
+            <a href="../shopping_cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
           </li>
         </ul>
         <div class="header__cart__price">item: <span>$150.00</span></div>
@@ -108,7 +108,8 @@
               <li class="active"><a href="{% url "shop_details" %}">Shop Details</a></li>
             </ul>
           </li>
-          <li><a href="{% url "shopping_cart" %}">Shopping Cart</a></li>
+          <li><a href="../admin">Admin Site</a></li>
+          <!-- <li><a href="{% url "shopping_cart" %}">Shopping Cart</a></li> -->
         </ul>
       </nav>
       <div id="mobile-menu-wrap"></div>
@@ -168,7 +169,8 @@
                     </li>
                   </ul>
                 </li>
-                <li><a href="{% url "shopping_cart" %}">Shopping Cart</a></li>
+                <li><a href="../admin">Admin Site</a></li>
+                <!-- <li><a href="{% url "shopping_cart" %}">Shopping Cart</a></li> -->
               </ul>
             </nav>
           </div>
@@ -180,11 +182,11 @@
                 </li>
                 <li>
                   <a href="#"
-                    ><i class="fa fa-shopping-bag"></i> <span>3</span></a
+                    ><i class="fa fa-shopping-bag"></i> <span>{{qty_buy}}</span></a
                   >
                 </li>
               </ul>
-              <div class="header__cart__price">item: <span>{{full_pr}}đ</span></div>
+              <div class="header__cart__price">item: <span>{{full_pr}} đ</span></div>
             </div>
           </div>
         </div>
@@ -275,6 +277,9 @@
           </div>
           <div class="col-lg-6 col-md-6">
             <div class="product__details__text">
+              <form method="post" action="../add_to_cart/">
+                {% csrf_token %}
+              <input type="hidden" name="product_name_add" value="{{product_detail.name}}" style="display: none;"/>
               <h3>{{product_detail.name}}</h3>
               <div class="product__details__rating">
                 <i class="fa fa-star"></i>
@@ -291,21 +296,22 @@
               <div class="product__details__quantity">
                 <div class="quantity">
                   <div class="pro-qty">
-                    <input type="text" value="1" />
+                    <input type="number" name="product_quantity_add" value="1" />
                   </div>
                 </div>
               </div>
-              <a href="#" class="primary-btn">ADD TO CARD</a>
+              <button type="submit" name="add" class="primary-btn">ADD TO CARD</button>
               <a href="#" class="heart-icon"
                 ><span class="icon_heart_alt"></span
               ></a>
               <ul>
-                <li><b>Availability</b> <span>In Stock</span></li>
+                <li><b>Availability</b> <span>{{product_detail.stock}}</span></li>
                 <li>
                   <b>Shipping</b>
                   <span>01 day shipping. <samp>Free pickup today</samp></span>
                 </li>
                 <li><b>Weight</b> <span>{{weight}} kg</span></li>
+              </form>
               </ul>
             </div>
           </div>

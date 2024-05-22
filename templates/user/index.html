@@ -109,7 +109,8 @@
               <li><a href="{% url "shop_details" %}">Shop Details</a></li>
             </ul>
           </li>
-          <li><a href="{% url "shopping_cart" %}">Shopping Cart</a></li>
+          <!-- <li><a href="{% url "shopping_cart" %}">Shopping Cart</a></li> -->
+          <li><a href="../admin">Admin Site</a></li>
         </ul>
       </nav>
       <div id="mobile-menu-wrap"></div>
@@ -169,7 +170,8 @@
                     <li><a href="{% url "shop_details" %}">Shop Details</a></li>
                   </ul>
                 </li>
-                <li><a href="{% url "shopping_cart" %}">Shopping Cart</a></li>
+                <!-- <li><a href="{% url "shopping_cart" %}">Shopping Cart</a></li> -->
+                <li><a href="../admin">Admin Site</a></li>
               </ul>
             </nav>
           </div>
@@ -177,15 +179,15 @@
             <div class="header__cart">
               <ul>
                 <li>
-                  <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
+                  <a href="#"><i class="fa fa-heart"></i> <span>9999</span></a>
                 </li>
                 <li>
-                  <a href="#"
-                    ><i class="fa fa-shopping-bag"></i> <span>3</span></a
+                  <a href="../shopping_cart"
+                    ><i class="fa fa-shopping-bag"></i> <span>{{qty_buy}}</span></a
                   >
                 </li>
               </ul>
-              <div class="header__cart__price">item: <span>$150.00</span></div>
+              <div class="header__cart__price">item: <span>{{full_pr}} đ</span></div>
             </div>
           </div>
         </div>
@@ -345,7 +347,7 @@
                     <a href="#"><i class="fa fa-retweet"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{% url 'shop_details' %}?name={{ random_eight.0.name }}"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
@@ -369,7 +371,7 @@
                     <a href="#"><i class="fa fa-retweet"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{% url 'shop_details' %}?name={{ random_eight.1.name }}"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
@@ -393,7 +395,7 @@
                     <a href="#"><i class="fa fa-retweet"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{% url 'shop_details' %}?name={{ random_eight.2.name }}"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
@@ -417,7 +419,7 @@
                     <a href="#"><i class="fa fa-retweet"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{% url 'shop_details' %}?name={{ random_eight.3.name }}"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
@@ -441,7 +443,7 @@
                     <a href="#"><i class="fa fa-retweet"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{% url 'shop_details' %}?name={{ random_eight.4.name }}"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
@@ -465,7 +467,7 @@
                     <a href="#"><i class="fa fa-retweet"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{% url 'shop_details' %}?name={{ random_eight.5.name }}"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
@@ -489,7 +491,7 @@
                     <a href="#"><i class="fa fa-retweet"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{% url 'shop_details' %}?name={{ random_eight.6.name }}"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
@@ -513,7 +515,7 @@
                     <a href="#"><i class="fa fa-retweet"></i></a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{% url 'shop_details' %}?name={{ random_eight.7.name }}"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>

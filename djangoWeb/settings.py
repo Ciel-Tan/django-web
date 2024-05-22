@@ -144,3 +144,8 @@ AUTH_USER_MODEL = "app.user"
 
 LOGIN_REDIRECT_URL = 'shopping_cart'  # Chuyển hướng người dùng sau khi đăng nhập
 LOGIN_URL = 'admin'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Đảm bảo dòng này có mặt
+    # Có thể thêm backend khác nếu cần thiết
+]
